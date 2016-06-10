@@ -2,9 +2,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Shortcut</title>
+<title>Shortcut - Upload</title>
 <link rel="stylesheet" href="css/bulma.css">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<style>
+.inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+</style>
 </head>
 <body>
   <section class="hero is-danger is-medium">
@@ -58,45 +68,58 @@
 </div>
     </div>
   </div>
-
-  <!-- Hero footer: will stick at the bottom -->
-  <div class="tabs is-centered is-danger">
-  <ul>
-    <li class="is-active">
-      <a>
-        <span class="icon is-small"><i class="fa fa-hourglass-half"></i></span>
-        <span>Trending</span>
-      </a>
-    </li>
-    <li>
-      <a>
-        <span class="icon is-small"><i class="fa fa-eye"></i></span>
-        <span>Most Viewed</span>
-      </a>
-    </li>
-    <li>
-      <a>
-        <span class="icon is-small"><i class="fa fa-thumbs-up"></i></span>
-        <span>Most Liked</span>
-      </a>
-    </li>
-  </ul>
-</div>
-</section>
-<section class="section">
+  
+  <section class="section">
     <div class="container">
       <div class="heading">
-        <h1 class="title">Section</h1>
-        <h2 class="subtitle">
-          A simple container to divide your page into <strong>sections</strong>, like the one you're currently reading
-        </h2>
-      </div>
+        <h1 class="title" style="color:black;">Upload Video</h1> </div>
+		<hr>
+          <form method='post'  enctype='multipart/form-data'>
+		  <progress class="progress is-danger" value="0" max="100">Progress Bar</progress>
+		  
+		  <label class="label">Name(Optional)</label>
+<p class="control">
+  <input class="input" type="text" placeholder="Enter name">
+</p>
+<label class="label">Description</label>
+<p class="control">
+  <textarea class="textarea" placeholder="Write something about the video..."></textarea>
+</p>
+		  
+		  
+<p class="control">
+<!--  <input type='file' name='video'/> -->
+
+<input type="file" name="video" id="file" class="inputfile" />
+<label for="file" class="button is-primary">Browse</label>
+<input type='submit' value='Upload' class="button is-danger"/><strong style="color:green"></strong>
+</p>
+</form>
     </div>
   </section>
-  <script async id="twitter-wjs" src="https://platform.twitter.com/widgets.js"></script>
-<script async type="text/javascript" src="https://s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-  <script src="js/bulma.js"></script>
-  <script src="js/clipboard.min.js"></script>
-</body>
+  </body>
 </html>
+<?php
+if(isset($_FILES['video']))
+{
+			    $name = $_FILES['video']['name'];
+				$type = explode('.', $name);
+				$type = end($type);
+				$size = $_FILES['video']['size'];
+//to create a random file name
+				$random_name = rand();
+				$tmp_name = $_FILES["video"]["tmp_name"];
+//check format for the uploaded video
+			     if($type != 'mp4' && $type != 'MP4'  && $type != 'flv'){
+					$message = "Video Format Not Supported";
+					}
+				else {
+//move the uploaded video with random name to your folder
+					 move_uploaded_file($tmp_name,'upload/'.$random_name.'.'.$type);
+					$message = "Successfully Uploaded!!";
+				}
+				echo "$message <br/><br/>";
+}
+?>
+
+		
