@@ -1,16 +1,10 @@
 <?php
-$servername = "127.0.0.1";
-$username = "root";
-$password = "";
-$dbname = "video_upload";
+ define('DB_HOST', 'localhost');
+ define('DB_NAME', 'video_upload'); 
+ define('DB_USER','root');
+ define('DB_PASSWORD','');
+ $con=mysql_connect(DB_HOST,DB_USER,DB_PASSWORD) or die("Failed to connect to MySQL: " . mysql_error());
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+ $db=mysql_select_db(DB_NAME,$con) or die("Failed to connect to MySQL: " . mysql_error()); 
+ ?>
 
-
-$conn->close();
-?>
