@@ -132,7 +132,7 @@ include 'connect.php';
 <!--  <input type='file' name='video'/> -->
   <input type="file" name="file1" id="file1" class="inputfile"/><br>
   <label for="file1" class="button is-primary">Browse</label>
-  <input type="submit"id="submit1"  value="Upload File"  class="button is-danger" onclick="uploadFile()" disabled="disabled"  />
+  <input type="submit"id="submit1"  value="Upload File"  class="button is-danger" onclick="uploadFile()"   />
     <h3 id="status"></h3>
   <p id="loaded_n_total"></p>
 
