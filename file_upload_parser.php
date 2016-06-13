@@ -1,7 +1,17 @@
 
 
 <?php
-include 'connect.php';
+$servername = "127.0.0.1";
+$username = "root";
+$password = "";
+$dbname = "video_upload";
+ 
+ // Create connection
+$con = new mysqli($servername, $username, $password, $dbname);
+// Check connection
+if ($con->connect_error) {
+    die("Connection failed: " . $con->connect_error);
+}
 			    $name = $_FILES['file1']['name'];
 				$type = explode('.', $name);
 				$type = end($type);
@@ -16,13 +26,12 @@ include 'connect.php';
 				else {
 //move the uploaded video with random name to your folder
 				move_uploaded_file($tmp_name,'upload/'.$random_name.'.'.$type);
-				$result = 	 mysql_query("INSERT INTO `videos`  VALUES('','$name','$random_name')") ;
-				if (!$result) {
-					die('Invalid query: ' . mysql_error());
-					}
-					$message = "Successfully Uploaded!!";
-					
-					
+				$sql = "INSERT INTO videos (name,url) VALUES('$name','$random_name')";
+				if ($con->query($sql) === TRUE) {
+					echo "New record created successfully";
+				} else {
+					echo "Error: " . $sql . "<br>" . $conn->error;
 				}
-				echo "$message <br/><br/>";
+				}
+				$con->close();
 ?>	

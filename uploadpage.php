@@ -120,6 +120,10 @@ include 'connect.php';
 <p class="control">
   <input class="input" type="text" placeholder="Enter name">
 </p>
+<label class="label">Video Title</label>
+<p class="control">
+  <input class="input" type="text" placeholder="Title for the Video">
+</p>
 <label class="label">Description</label>
 <p class="control">
   <textarea class="textarea" placeholder="Write something about the video..."></textarea>
@@ -128,13 +132,19 @@ include 'connect.php';
 <!--  <input type='file' name='video'/> -->
   <input type="file" name="file1" id="file1" class="inputfile"/><br>
   <label for="file1" class="button is-primary">Browse</label>
-  <input type="submit"id="submit1"  value="Upload File"  class="button is-danger" onclick="uploadFile()"   />
+  <input type="submit" id="submit1"  value="Upload File"  class="button is-disabled" onclick="uploadFile()"/>
     <h3 id="status"></h3>
   <p id="loaded_n_total"></p>
 
  </p>
 </form>
+<script>
+document.getElementById("file1").onchange = function() {myFunction()};
 
+function myFunction() {
+document.getElementById("submit1").className = "button is-danger";
+}
+</script>
   </body>
 </html>
 
