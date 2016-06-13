@@ -50,14 +50,10 @@ function errorHandler(event){
 function abortHandler(event){
 	_("status").innerHTML = "Upload Aborted";
 }
-function  myfunction(){
 
-$('#file1').change(function(){
-         $('#submit1').removeAttr('disabled');
-}
 </script>
 </head>
-<body onload="myfunction()">
+<body >
   <section class="hero is-danger is-medium">
   <!-- Hero header: will stick at the top -->
   <div class="hero-head">
